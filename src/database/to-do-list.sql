@@ -43,3 +43,5 @@ VALUES
 SELECT * FROM users;
 SELECT * FROM tasks;
 SELECT * FROM users_tasks;
+DELETE FROM users_tasks WHERE user_id = 'f002';
+DELETE FROM users WHERE id = 'f001';
