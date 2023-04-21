@@ -4,7 +4,7 @@ Aqui criei um aplicativo de gestão de tarefas. <br>
 
 Aplicação backend de servidor express com banco de dados sqlite3.<br>
 
-##Passo a passo
+## Passo-a-passo
 
 rodar o script npm run dev ou buildar e rodar o de start.<br>
 
