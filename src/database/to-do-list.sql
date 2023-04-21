@@ -45,3 +45,14 @@ SELECT * FROM tasks;
 SELECT * FROM users_tasks;
 DELETE FROM users_tasks WHERE user_id = 'f002';
 DELETE FROM users WHERE id = 'f001';
+SELECT * FROM tasks
+LEFT JOIN users_tasks
+ON users_tasks.task_id = tasks.id
+INNER JOIN users
+ON users_tasks.user_id = users.id;
+
+SELECT * FROM tasks
+LEFT JOIN users_tasks
+ON users_tasks.task_id = tasks.id
+LEFT JOIN users
+ON users_tasks.user_id = users.id;
