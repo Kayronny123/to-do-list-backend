@@ -382,3 +382,38 @@ app.post("/tasks/:taskId/users/:userId", async (req: Request, res: Response) => 
     }
 })
 
+
+app.delete("/tasks/:taskId/users/:userId", async (req: Request, res: Response) => {
+    try {
+        const taskIdToDelete = req.params.taskId
+        const userIdToDelete = req.params.userId
+        
+        const [task]: TTasksDB[]=await db("tasks").where({id: taskIdToDelete})
+        if(!task){
+            res.status(400)
+            throw new Error("TaskId nao encontrado")
+        }
+        const [user]: TUserDB[]=await db("users").where({id: userIdToDelete})
+        if(!user){
+            res.status(400)
+            throw new Error("UserId nao encontrado")
+        }
+        await db("users_tasks").del()
+        .where({task_id: taskIdToDelete})
+        .andWhere({user_id: userIdToDelete})
+        res.status(200).send({message: "user excluido da task com sucesso"})
+    } catch (error) {
+        console.log(error)
+
+        if (req.statusCode === 200) {
+            res.status(500)
+        }
+
+        if (error instanceof Error) {
+            res.send(error.message)
+        } else {
+            res.send("Erro inesperado")
+        }
+    }
+})
+
